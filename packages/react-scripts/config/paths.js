@@ -15,6 +15,8 @@ const url = require('url');
 // Make sure any symlinks in the project folder are resolved:
 // https://github.com/facebook/create-react-app/issues/637
 const appDirectory = fs.realpathSync(process.cwd());
+const dirArg = process.argv[process.argv.indexOf('--dir') + 1];
+const clientDirectory = dirArg ? dirArg + '/' : '';
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 
 const envPublicUrl = process.env.PUBLIC_URL;
@@ -77,15 +79,15 @@ const resolveModule = (resolveFn, filePath) => {
 module.exports = {
   dotenv: resolveApp('.env'),
   appPath: resolveApp('.'),
-  appBuild: resolveApp('build'),
-  appPublic: resolveApp('public'),
-  appHtml: resolveApp('public/index.html'),
-  appIndexJs: resolveModule(resolveApp, 'src/index'),
+  appBuild: resolveApp(clientDirectory + 'build'),
+  appPublic: resolveApp(clientDirectory + 'public'),
+  appHtml: resolveApp(clientDirectory + 'public/index.html'),
+  appIndexJs: resolveModule(resolveApp, clientDirectory + 'src/index'),
   appPackageJson: resolveApp('package.json'),
-  appSrc: resolveApp('src'),
+  appSrc: resolveApp(clientDirectory + 'src'),
   appTsConfig: resolveApp('tsconfig.json'),
   yarnLockFile: resolveApp('yarn.lock'),
-  testsSetup: resolveModule(resolveApp, 'src/setupTests'),
+  testsSetup: resolveModule(resolveApp, '.testSetup.js'),
   proxySetup: resolveApp('src/setupProxy.js'),
   appNodeModules: resolveApp('node_modules'),
   publicUrl: getPublicUrl(resolveApp('package.json')),
@@ -99,15 +101,15 @@ const resolveOwn = relativePath => path.resolve(__dirname, '..', relativePath);
 module.exports = {
   dotenv: resolveApp('.env'),
   appPath: resolveApp('.'),
-  appBuild: resolveApp('build'),
-  appPublic: resolveApp('public'),
-  appHtml: resolveApp('public/index.html'),
-  appIndexJs: resolveModule(resolveApp, 'src/index'),
+  appBuild: resolveApp(clientDirectory + 'build'),
+  appPublic: resolveApp(clientDirectory + 'public'),
+  appHtml: resolveApp(clientDirectory + 'public/index.html'),
+  appIndexJs: resolveModule(resolveApp, clientDirectory + 'src/index'),
   appPackageJson: resolveApp('package.json'),
-  appSrc: resolveApp('src'),
+  appSrc: resolveApp(clientDirectory + 'src'),
   appTsConfig: resolveApp('tsconfig.json'),
   yarnLockFile: resolveApp('yarn.lock'),
-  testsSetup: resolveModule(resolveApp, 'src/setupTests'),
+  testsSetup: resolveModule(resolveApp, '.testSetup.js'),
   proxySetup: resolveApp('src/setupProxy.js'),
   appNodeModules: resolveApp('node_modules'),
   publicUrl: getPublicUrl(resolveApp('package.json')),
@@ -115,7 +117,7 @@ module.exports = {
   // These properties only exist before ejecting:
   ownPath: resolveOwn('.'),
   ownNodeModules: resolveOwn('node_modules'), // This is empty on npm 3
-  appTypeDeclarations: resolveApp('src/react-app-env.d.ts'),
+  appTypeDeclarations: resolveApp(clientDirectory + 'src/react-app-env.d.ts'),
   ownTypeDeclarations: resolveOwn('lib/react-app.d.ts'),
 };
 
