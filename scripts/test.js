@@ -73,7 +73,7 @@ const paths = require('../config/paths');
 
 // get rid of --dir arg we needed for paths so we don't confuse jest
 const dirArgIndex = argv.indexOf('--dir');
-argv.splice(dirArgIndex,2);
+argv.splice(dirArgIndex, 2);
 
 argv.push(
   '--config',

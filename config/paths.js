@@ -82,12 +82,12 @@ module.exports = {
   appBuild: resolveApp(clientDirectory + 'build'),
   appPublic: resolveApp(clientDirectory + 'public'),
   appHtml: resolveApp(clientDirectory + 'public/index.html'),
-  appIndexJs: resolveApp(clientDirectory + 'src/index.js'),
+  appIndexJs: resolveModule(resolveApp, clientDirectory + 'src/index'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp(clientDirectory + 'src'),
   appTsConfig: resolveApp('tsconfig.json'),
   yarnLockFile: resolveApp('yarn.lock'),
-  testsSetup: resolveApp(clientDirectory + 'src/setupTests.js'),
+  testsSetup: resolveModule(resolveApp, '.testSetup.js'),
   proxySetup: resolveApp('src/setupProxy.js'),
   appNodeModules: resolveApp('node_modules'),
   publicUrl: getPublicUrl(resolveApp('package.json')),
@@ -104,12 +104,12 @@ module.exports = {
   appBuild: resolveApp(clientDirectory + 'build'),
   appPublic: resolveApp(clientDirectory + 'public'),
   appHtml: resolveApp(clientDirectory + 'public/index.html'),
-  appIndexJs: resolveApp(clientDirectory + 'src/index.js'),
+  appIndexJs: resolveModule(resolveApp, clientDirectory + 'src/index'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp(clientDirectory + 'src'),
   appTsConfig: resolveApp('tsconfig.json'),
   yarnLockFile: resolveApp('yarn.lock'),
-  testsSetup: resolveApp(clientDirectory + 'src/setupTests.js'),
+  testsSetup: resolveModule(resolveApp, '.testSetup.js'),
   proxySetup: resolveApp('src/setupProxy.js'),
   appNodeModules: resolveApp('node_modules'),
   publicUrl: getPublicUrl(resolveApp('package.json')),
@@ -117,7 +117,7 @@ module.exports = {
   // These properties only exist before ejecting:
   ownPath: resolveOwn('.'),
   ownNodeModules: resolveOwn('node_modules'), // This is empty on npm 3
-  appTypeDeclarations: resolveApp('src/react-app-env.d.ts'),
+  appTypeDeclarations: resolveApp(clientDirectory + 'src/react-app-env.d.ts'),
   ownTypeDeclarations: resolveOwn('lib/react-app.d.ts'),
 };
 
